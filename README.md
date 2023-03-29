@@ -18,11 +18,7 @@ $ npm run dev
 - DynamoDB local
 
 ```shell
-$ docker pull amazon/dynamodb-local
-$ docker run -d -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb
-$ docker ps --no-trunc
-$ npm install dynamodb-admin -g
-$ npx dynamodb-admin -o
+$ make up
 ```
 
 DynamoDB localにアクセス(http://localhost:8001)
