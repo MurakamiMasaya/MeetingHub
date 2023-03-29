@@ -1,1 +1,1 @@
-## MeetingHubのリポジトリです
+## MeetingHub のリポジトリです
