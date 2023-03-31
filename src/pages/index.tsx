@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 const Home: NextPage = () => {
   return (
     <>
-      <div />
+      <div>Vercelデプロイの動作確認</div>
     </>
   )
 }
