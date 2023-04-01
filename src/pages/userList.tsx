@@ -1,10 +1,12 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb'
 
-type UserListProps = {
-  Id: number
-  Name: string
-}[]
+type UserListProps =
+  | {
+      Id: number
+      Name: string
+    }[]
+  | null
 
 const UserList: NextPage = ({ users }: UserListProps) => {
   return (
