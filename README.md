@@ -37,7 +37,7 @@ $ aws dynamodb create-table --table-name sample-users \
 $ aws dynamodb list-tables --endpoint-url http://localhost:8000
 
 --データ挿入
-$ aws dynamodb put-item --table-name sample-users --item '{"Id":{"N":"1"},"Name":{"S":"Jack"}, "Id":{"N":"2"},"Name":{"S":"Peter"}}' --endpoint-url http://localhost:8000
+$ aws dynamodb put-item --table-name sample-users --item '{"Id":{"N":"1"},"Name":{"S":"Jack"}}' --endpoint-url http://localhost:8000
 
 --データ確認
 $ aws dynamodb get-item --table-name sample-users --key '{"Id":{"N":"1"}}' --endpoint-url http://localhost:8000

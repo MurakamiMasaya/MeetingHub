@@ -1,22 +1,19 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb'
 
-type UserProps = {
+type UserListProps = {
   Id: number
   Name: string
-}
+}[]
 
-type UserListProps = UserProps[]
-
-const UserList: NextPage = ({ users }: UserListProps) => {
+const UserList = ({ users }: UserListProps) => {
+  console.log(users, 'users')
   return (
     <>
       <h1>User List</h1>
       <ul>
         {users && users.length !== 0 ? (
-          users.map(({ user }: UserProps) => (
-            <li key={user.Id.N}>{user.Name.S}</li>
-          ))
+          users.map((user) => <li key={user.Id.N}>{user.Name.S}</li>)
         ) : (
           <li>No Users found</li>
         )}
