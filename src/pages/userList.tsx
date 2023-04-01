@@ -1,5 +1,5 @@
-import { GetServerSideProps, NextPage } from 'next'
 import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb'
+import { GetServerSideProps } from 'next'
 
 type UserListProps = {
   users: {
