@@ -1,5 +1,9 @@
 ## MeetingHub のリポジトリです
 
+- 仮のURL
+
+https://meeting-hub-two.vercel.app/
+
 ## 環境構築手順
 
 - clone
