@@ -46,7 +46,7 @@ const Logo = styled.img`
 const Title = styled.h1`
   font-size: 36px;
   margin-left: 8px;
-  color: #4060b1;
+  color: #294ba4;
   ${mediaQuery('tab')} {
     font-size: 32px;
     margin: 4px 0 4px 4px;

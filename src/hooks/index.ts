@@ -1,1 +1,2 @@
-export { mediaQuery } from './useMedia'
+export { useBoolean } from './useBoolean'
+export { mediaQuery } from './useMediaQuery'
