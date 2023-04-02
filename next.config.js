@@ -5,6 +5,9 @@ const nextConfig = {
     config.experiments = { ...config.experiments, topLevelAwait: true }
     return config
   },
+  compiler: {
+    emotion: true
+  }
 }
 
 module.exports = nextConfig
