@@ -1,9 +1,12 @@
+import { Footer, Header } from '@/components'
 import { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
     <>
-      <div>Vercelデプロイの動作確認</div>
+      <Header />
+      <div>body</div>
+      <Footer />
     </>
   )
 }
