@@ -1,3 +1,4 @@
+import { mediaQuery } from '@/hooks'
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
@@ -33,6 +34,9 @@ const Link = styled.a`
   color: #ffffff;
   font-size: 16px;
   margin-right: 8px;
+  ${mediaQuery('sp')} {
+    font-size: 12px;
+  }
 `
 
 export default Footer
