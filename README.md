@@ -1,6 +1,6 @@
 ## みんなで集合 のリポジトリです
 
-- 仮のURL
+- 仮の URL
 
 https://meeting-hub-two.vercel.app/
 
