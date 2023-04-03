@@ -1,5 +1,5 @@
 import { Footer, Header } from '@/components'
-import { useBoolean } from '@/hooks'
+import { mediaQuery, useBoolean } from '@/hooks'
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
@@ -11,10 +11,11 @@ const Home: NextPage = () => {
       <Header />
       <MainContainer>
         {isResponsive ? (
-          <DescriptionImage src="/description_sp.png" alt="description" />
+          <Image src="/description_sp.png" alt="description" />
         ) : (
-          <DescriptionImage src="/description_pc.png" alt="description" />
+          <Image src="/description_pc.png" alt="description" />
         )}
+        <Image src="/adsense_gray.png" alt="google adsense" />
       </MainContainer>
       <Footer />
     </>
@@ -27,8 +28,11 @@ const MainContainer = styled.main`
   max-width: 1000px;
 `
 
-const DescriptionImage = styled.img`
-  margin: 24px auto;
+const Image = styled.img`
+  margin: 36px auto;
+  ${mediaQuery('sp')} {
+    margin: 16px auto;
+  }
 `
 
 export default Home
