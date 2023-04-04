@@ -26,7 +26,7 @@ const FooterContainer = styled.div`
   height: 80px;
   margin: 0 auto;
   max-width: 1000px;
-  width: 80%;
+  width: 72%;
 `
 
 const Link = styled.a`

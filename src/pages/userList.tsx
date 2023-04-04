@@ -27,28 +27,28 @@ const UserList = ({ users }: UserListProps) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   const client = new DynamoDBClient({
     region: process.env.AWS_REGION,
-    endpoint: process.env.DYNAMODB_ENDPOINT,
+    endpoint: process.env.DYNAMODB_ENDPOINT
   })
 
   const tableName = 'sample-users'
 
   const command = new ScanCommand({
-    TableName: tableName,
+    TableName: tableName
   })
 
   try {
     const result = await client.send(command)
     return {
       props: {
-        users: result.Items,
-      },
+        users: result.Items
+      }
     }
   } catch (error) {
     console.log(error)
     return {
       props: {
-        users: [],
-      },
+        users: []
+      }
     }
   }
 }
