@@ -1,4 +1,4 @@
-import { Footer, Header } from '@/components'
+import { EventForm, Footer, Header } from '@/components'
 import { mediaQuery, useBoolean } from '@/hooks'
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
@@ -9,30 +9,43 @@ const Home: NextPage = () => {
   return (
     <>
       <Header />
-      <MainContainer>
-        {isResponsive ? (
-          <Image src="/description_sp.png" alt="description" />
-        ) : (
-          <Image src="/description_pc.png" alt="description" />
-        )}
+      <ImageWrapper>
+        <Image
+          src={`/description_${isResponsive ? 'sp' : 'pc'}.png`}
+          alt="description"
+        />
         <Image src="/adsense_gray.png" alt="google adsense" />
-      </MainContainer>
+      </ImageWrapper>
+      <EventFormContainer>
+        <EventForm />
+        <ImageWrapper>
+          <Image src="/adsense_white.png" alt="google adsense" />
+        </ImageWrapper>
+      </EventFormContainer>
       <Footer />
     </>
   )
 }
 
-const MainContainer = styled.main`
-  height: auto;
-  margin: 0 auto;
+const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 36px 24px;
   max-width: 1000px;
+  ${mediaQuery('sp')} {
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
 `
 
 const Image = styled.img`
-  margin: 36px auto;
-  ${mediaQuery('sp')} {
-    margin: 16px auto;
-  }
+  width: 100%;
+`
+
+const EventFormContainer = styled.div`
+  background-color: #e3eff5;
 `
 
 export default Home
