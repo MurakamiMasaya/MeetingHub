@@ -21,7 +21,7 @@ export const Button: React.FC<ButtonProps> = React.memo(
 
 Button.displayName = 'Button'
 
-const StyledButton = styled.button<{ size; color }>`
+const StyledButton = styled.button<{ size: string; color: string }>`
   border: none;
   border-radius: 5px;
   padding: 16px 24px;
