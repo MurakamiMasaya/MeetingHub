@@ -33,9 +33,9 @@ const ImageWrapper = styled.div`
   align-items: center;
   gap: 24px;
   padding: 36px 24px;
+  margin: 0 auto;
   max-width: 1000px;
   ${mediaQuery('sp')} {
-    margin: 0 auto;
     padding: 24px 16px;
   }
 `
