@@ -1,5 +1,7 @@
 import { Button, InputField, TextArea } from '@/components'
 import { Event } from '@/types/Event'
+import { DynamoDBClient, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb'
+import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb'
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
 import { useCallback, useState } from 'react'
@@ -10,6 +12,41 @@ export const EventForm: NextPage = () => {
   const [eventLocation, setEventLocation] = useState('')
   const [eventMemo, setEventMemo] = useState('')
 
+  // イベントをテーブルに保存する
+  const handleSaveEvent = useCallback(async (newEvent: Event) => {
+    const config: DynamoDBClientConfig = {
+      endpoint: process.env.DYNAMODB_ENDPOINT,
+      region: process.env.DYNAMODB_REGION,
+      credentials: {
+        accessKeyId: process.env.DYNAMODB_ACCESS_KEY_ID ?? 'FAKE',
+        secretAccessKey: process.env.DYNAMODB_SECRET_ACCESS_KEY ?? 'FAKE'
+      }
+    }
+    console.log(config, 'config')
+
+    const dbClient = new DynamoDBClient(config)
+    const documentClient = DynamoDBDocumentClient.from(dbClient)
+
+    const params = {
+      TableName: 'events',
+      Item: {
+        eventName: newEvent.eventName,
+        eventPurpose: newEvent.eventPurpose,
+        eventLocation: newEvent.eventLocation,
+        eventMemo: newEvent.eventMemo
+      }
+    }
+
+    const command = new PutCommand(params)
+
+    try {
+      await documentClient.send(command)
+      console.log('Success')
+    } catch (error) {
+      console.error(error)
+    }
+  }, [])
+
   const handleSubmit = useCallback(() => {
     const newEvent: Event = {
       eventName,
@@ -18,6 +55,7 @@ export const EventForm: NextPage = () => {
       eventMemo
     }
     console.log(newEvent, 'newEvent')
+    handleSaveEvent(newEvent)
   }, [eventName, eventPurpose, eventLocation, eventMemo])
 
   const handleEventName = useCallback((value: string) => {
