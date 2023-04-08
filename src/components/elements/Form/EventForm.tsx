@@ -47,54 +47,54 @@ export const EventForm: NextPage = () => {
   }
 
   return (
-    <FormContainer>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <InputText
-          label="イベント名"
-          name="name"
-          placeholder="〇〇同窓会、〇〇打ち合わせ"
-          maxLength={20}
-          isRequired
-          register={register<'name'>('name')}
-          helperText={errors.name?.message ?? ''}
-          error={'name' in errors}
-        />
-        <InputText
-          label="イベントの目的"
-          name="purpose"
-          placeholder="飲み会、ショッピング"
-          maxLength={30}
-          isRequired
-          register={register<'purpose'>('purpose')}
-          helperText={errors.purpose?.message ?? ''}
-          error={'purpose' in errors}
-        />
-        <InputText
-          label="イベントを開催したい範囲"
-          name="location"
-          placeholder="東京、関西"
-          maxLength={20}
-          isRequired
-          register={register<'location'>('location')}
-          helperText={errors.location?.message ?? ''}
-          error={'location' in errors}
-        />
-        <InputTextarea
-          label="メモ"
-          name="memo"
-          placeholder="締切は〇〇日まで"
-          maxLength={1000}
-          register={register<'memo'>('memo')}
-          helperText={errors.memo?.message ?? ''}
-          error={'memo' in errors}
-        />
-        <Button disabled={isLoading}>イベントを作る</Button>
-      </form>
+    <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <InputText
+        label="イベント名"
+        name="name"
+        placeholder="〇〇同窓会、〇〇打ち合わせ"
+        maxLength={20}
+        isRequired
+        register={register<'name'>('name')}
+        helperText={errors.name?.message ?? ''}
+        error={'name' in errors}
+      />
+      <InputText
+        label="イベントの目的"
+        name="purpose"
+        placeholder="飲み会、ショッピング"
+        maxLength={30}
+        isRequired
+        register={register<'purpose'>('purpose')}
+        helperText={errors.purpose?.message ?? ''}
+        error={'purpose' in errors}
+      />
+      <InputText
+        label="イベントを開催したい範囲"
+        name="location"
+        placeholder="東京、関西"
+        maxLength={20}
+        isRequired
+        register={register<'location'>('location')}
+        helperText={errors.location?.message ?? ''}
+        error={'location' in errors}
+      />
+      <InputTextarea
+        label="メモ"
+        name="memo"
+        placeholder="締切は〇〇日まで"
+        maxLength={1000}
+        register={register<'memo'>('memo')}
+        helperText={errors.memo?.message ?? ''}
+        error={'memo' in errors}
+      />
+      <Button disabled={isLoading}>イベントを作る</Button>
     </FormContainer>
   )
 }
 
-const FormContainer = styled.div`
+const FormContainer = styled.form`
+  display: grid;
+  gap: 16px;
   max-width: 1000px;
   margin: 0 auto;
   padding: 16px;
