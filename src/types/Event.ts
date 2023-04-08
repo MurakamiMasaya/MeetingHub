@@ -1,6 +1,6 @@
 export type Event = {
-  eventName: string
-  eventPurpose: string
-  eventLocation: string
-  eventMemo?: string
+  name: string
+  purpose: string
+  location: string
+  memo?: string
 }

@@ -7,12 +7,18 @@ type ButtonProps = {
   color?: string
   size?: 'small' | 'medium' | 'large'
   onClick?: () => void
+  disabled: boolean
 }
 
 export const Button: React.FC<ButtonProps> = React.memo(
-  ({ children, color = '#294BA4', size = 'medium', onClick }) => {
+  ({ children, color = '#294BA4', size = 'medium', onClick, disabled }) => {
     return (
-      <StyledButton onClick={onClick} size={size} color={color}>
+      <StyledButton
+        onClick={onClick}
+        size={size}
+        color={color}
+        disabled={disabled}
+      >
         {children}
       </StyledButton>
     )
@@ -21,7 +27,11 @@ export const Button: React.FC<ButtonProps> = React.memo(
 
 Button.displayName = 'Button'
 
-const StyledButton = styled.button<{ size: string; color: string }>`
+const StyledButton = styled.button<{
+  size: string
+  color: string
+  disabled: boolean
+}>`
   border: none;
   border-radius: 5px;
   padding: 16px 24px;
@@ -29,7 +39,8 @@ const StyledButton = styled.button<{ size: string; color: string }>`
   width: 100%;
   background-color: ${({ color }) => color};
   color: #fff;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   font-size: 24px;
   font-weight: bold;
   ${mediaQuery('sp')} {
