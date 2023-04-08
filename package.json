@@ -14,6 +14,13 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@hookform/resolvers": "^2.9.7",
+    "@mui/base": "^5.0.0-alpha.90",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/lab": "^5.0.0-alpha.92",
+    "@mui/material": "^5.9.1",
+    "@mui/system": "^5.9.2",
+    "@mui/x-date-pickers": "^5.0.0-beta.2",
     "@types/node": "18.15.10",
     "@types/react": "18.0.30",
     "@types/react-dom": "18.0.11",
@@ -23,7 +30,10 @@
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "^5.0.2"
+    "react-hook-form": "^7.43.9",
+    "react-query": "^3.39.3",
+    "typescript": "^5.0.2",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.57.0",

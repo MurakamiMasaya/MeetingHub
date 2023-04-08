@@ -1,112 +1,95 @@
-import { Button, InputField, TextArea } from '@/components'
+import { Button, InputText, InputTextarea } from '@/components'
+import { putEvent } from '@/pages/api/events'
 import { Event } from '@/types/Event'
 import styled from '@emotion/styled'
-import AWS from 'aws-sdk'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { NextPage } from 'next'
-import { useCallback, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useMutation } from 'react-query'
+import { object, string } from 'yup'
 
 export const EventForm: NextPage = () => {
-  const [eventName, setEventName] = useState('')
-  const [eventPurpose, setEventPurpose] = useState('')
-  const [eventLocation, setEventLocation] = useState('')
-  const [eventMemo, setEventMemo] = useState('')
+  const { mutate, isLoading } = useMutation(putEvent)
 
-  // イベントをテーブルに保存する
-  const handleSaveEvent = useCallback(async (newEvent: Event) => {
-    AWS.config.update({
-      region: process.env.DYNAMODB_REGION,
-      credentials: {
-        accessKeyId: process.env.DYNAMODB_ACCESS_KEY_ID ?? 'FAKE',
-        secretAccessKey: process.env.DYNAMODB_SECRET_ACCESS_KEY ?? 'FAKE'
-      }
+  const getSchema = () => {
+    return object({
+      name: string()
+        .required('イベント名を入力してください。')
+        .max(20, 'イベント名は最大20文字です'),
+      purpose: string()
+        .required('イベント目的を入力してください')
+        .max(30, 'イベント目的は最大30文字です'),
+      location: string()
+        .required('イベントを開催したい範囲を入力してください')
+        .max(20, '開催したい範囲は最大30文字です'),
+      memo: string().max(1000, 'メモは最大1000文字です')
     })
+  }
 
-    const documentClient = new AWS.DynamoDB.DocumentClient()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<Event>({
+    mode: 'onChange',
+    resolver: yupResolver(getSchema())
+  })
 
-    try {
-      const params = {
-        TableName: 'events',
-        Item: {
-          event_name: newEvent.eventName,
-          event_purpose: newEvent.eventPurpose,
-          event_location: newEvent.eventLocation,
-          event_memo: newEvent.eventMemo
-        }
-      }
-      console.log(params, 'params')
-
-      const result = await documentClient.put(params)
-      console.log('Result:', result)
-    } catch (error) {
-      console.error(error)
-    }
-  }, [])
-
-  const handleSubmit = useCallback(() => {
-    const newEvent: Event = {
-      eventName,
-      eventPurpose,
-      eventLocation,
-      eventMemo
+  const onSubmit = async (data: Event) => {
+    const newEvent = {
+      name: data.name,
+      purpose: data.purpose,
+      location: data.location,
+      memo: data.memo
     }
     console.log(newEvent, 'newEvent')
-    handleSaveEvent(newEvent)
-  }, [eventName, eventPurpose, eventLocation, eventMemo])
-
-  const handleEventName = useCallback((value: string) => {
-    setEventName(value)
-  }, [])
-  const handleEventPurpose = useCallback((value: string) => {
-    setEventPurpose(value)
-  }, [])
-  const handleEventLocation = useCallback((value: string) => {
-    setEventLocation(value)
-  }, [])
-  const handleEventMemo = useCallback((value: string) => {
-    setEventMemo(value)
-  }, [])
+    await mutate(newEvent)
+  }
 
   return (
     <FormContainer>
-      <InputField
-        label="イベント名"
-        id="event-name"
-        placeholder="〇〇同窓会、〇〇打ち合わせ"
-        maxLength={20}
-        value={eventName}
-        setValue={handleEventName}
-        required={true}
-      />
-      <InputField
-        label="イベントの目的"
-        id="event-purpose"
-        placeholder="飲み会、ショッピング"
-        maxLength={20}
-        value={eventPurpose}
-        setValue={handleEventPurpose}
-        required={true}
-      />
-      <InputField
-        label="イベントを開催したい範囲"
-        id="event-location"
-        placeholder="東京、関西"
-        maxLength={20}
-        value={eventLocation}
-        setValue={handleEventLocation}
-        required={true}
-      />
-      <TextArea
-        label="メモ"
-        id="memo"
-        placeholder="締切は〇〇日まで"
-        maxLength={1000}
-        value={eventMemo}
-        setValue={handleEventMemo}
-        required={false}
-        rows={15}
-        cols={10}
-      />
-      <Button onClick={handleSubmit}>イベントを作る</Button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <InputText
+          label="イベント名"
+          name="name"
+          placeholder="〇〇同窓会、〇〇打ち合わせ"
+          maxLength={20}
+          isRequired
+          register={register<'name'>('name')}
+          helperText={errors.name?.message ?? ''}
+          error={'name' in errors}
+        />
+        <InputText
+          label="イベントの目的"
+          name="purpose"
+          placeholder="飲み会、ショッピング"
+          maxLength={30}
+          isRequired
+          register={register<'purpose'>('purpose')}
+          helperText={errors.purpose?.message ?? ''}
+          error={'purpose' in errors}
+        />
+        <InputText
+          label="イベントを開催したい範囲"
+          name="location"
+          placeholder="東京、関西"
+          maxLength={20}
+          isRequired
+          register={register<'location'>('location')}
+          helperText={errors.location?.message ?? ''}
+          error={'location' in errors}
+        />
+        <InputTextarea
+          label="メモ"
+          name="memo"
+          placeholder="締切は〇〇日まで"
+          maxLength={1000}
+          register={register<'memo'>('memo')}
+          helperText={errors.memo?.message ?? ''}
+          error={'memo' in errors}
+        />
+        <Button disabled={isLoading}>イベントを作る</Button>
+      </form>
     </FormContainer>
   )
 }
