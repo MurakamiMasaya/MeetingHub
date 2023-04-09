@@ -1,16 +1,12 @@
 import { Button, InputText, InputTextarea } from '@/components'
-import { putEvent } from '@/pages/api/events'
 import { Event } from '@/types/Event'
 import styled from '@emotion/styled'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NextPage } from 'next'
 import { useForm } from 'react-hook-form'
-import { useMutation } from 'react-query'
 import { object, string } from 'yup'
 
 export const EventForm: NextPage = () => {
-  const { mutate, isLoading } = useMutation(putEvent)
-
   const getSchema = () => {
     return object({
       name: string()
@@ -42,8 +38,16 @@ export const EventForm: NextPage = () => {
       location: data.location,
       memo: data.memo
     }
+
     console.log(newEvent, 'newEvent')
-    await mutate(newEvent)
+
+    await fetch('/api/events/put-event', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ data: newEvent })
+    })
   }
 
   return (
@@ -87,7 +91,7 @@ export const EventForm: NextPage = () => {
         helperText={errors.memo?.message ?? ''}
         error={'memo' in errors}
       />
-      <Button disabled={isLoading}>イベントを作る</Button>
+      <Button>イベントを作る</Button>
     </FormContainer>
   )
 }

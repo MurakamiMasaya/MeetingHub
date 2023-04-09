@@ -12,6 +12,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.309.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@hookform/resolvers": "^2.9.7",
@@ -33,9 +34,11 @@
     "react-hook-form": "^7.43.9",
     "react-query": "^3.39.3",
     "typescript": "^5.0.2",
+    "uuid": "^9.0.0",
     "yup": "^1.0.2"
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "eslint-config-prettier": "^8.8.0",
