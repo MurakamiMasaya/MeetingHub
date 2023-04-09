@@ -7,17 +7,23 @@ type ButtonProps = {
   color?: string
   size?: 'small' | 'medium' | 'large'
   onClick?: () => void
-  disabled: boolean
+  disabled?: boolean
 }
 
 export const Button: React.FC<ButtonProps> = React.memo(
-  ({ children, color = '#294BA4', size = 'medium', onClick, disabled }) => {
+  ({
+    children,
+    color = '#294BA4',
+    size = 'medium',
+    onClick,
+    disabled = false
+  }) => {
     return (
       <StyledButton
         onClick={onClick}
         size={size}
         color={color}
-        disabled={disabled}
+        disabled={disabled ?? false}
       >
         {children}
       </StyledButton>
