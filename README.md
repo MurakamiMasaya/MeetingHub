@@ -38,7 +38,6 @@ $ aws dynamodb create-table --table-name events \
     --endpoint-url http://localhost:8000
 ```
 
-
 - テーブル作成の手順(サンプル)
 
 ```shell
