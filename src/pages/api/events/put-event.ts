@@ -4,11 +4,11 @@ import { v4 as uuidv4 } from 'uuid'
 
 const dbClient = new DynamoDBClient({
   credentials: {
-    accessKeyId: 'dummy',
-    secretAccessKey: 'dummy'
+    accessKeyId: process.env.DYNAMODB_ACCESS_KEY_ID ?? 'dummy',
+    secretAccessKey: process.env.DYNAMODB_SECRET_ACCESS_KEY ?? 'dummy'
   },
-  endpoint: 'http://localhost:8000',
-  region: 'local'
+  endpoint: process.env.DYNAMODB_ENDPOINT,
+  region: process.env.DYNAMODB_REGION
 })
 
 export default async function handler(
