@@ -27,6 +27,18 @@ $ make up
 
 DynamoDB Local にアクセス(http://localhost:8001)
 
+- テーブル作成の手順
+
+```shell
+--eventsテーブルの作成
+$ aws dynamodb create-table --table-name events \
+    --attribute-definitions AttributeName=id,AttributeType=S \
+    --key-schema AttributeName=id,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+    --endpoint-url http://localhost:8000
+```
+
+
 - テーブル作成の手順(サンプル)
 
 ```shell

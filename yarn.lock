@@ -1232,6 +1232,11 @@
   "resolved" "https://registry.npmjs.org/@types/semver/-/semver-7.3.13.tgz"
   "version" "7.3.13"
 
+"@types/uuid@^9.0.1":
+  "integrity" "sha512-rFT3ak0/2trgvp4yYZo5iKFEPsET7vKydKF+VRCxlQ9bpheehyAJH89dAkaLEq/j/RZXJIqcgsmPJKUP1Z28HA=="
+  "resolved" "https://registry.npmjs.org/@types/uuid/-/uuid-9.0.1.tgz"
+  "version" "9.0.1"
+
 "@typescript-eslint/eslint-plugin@^5.57.0":
   "integrity" "sha512-itag0qpN6q2UMM6Xgk6xoHa0D0/P+M17THnr4SVgqn9Rgam5k/He33MA7/D7QoJcdMxHFyX7U9imaBonAX/6qA=="
   "resolved" "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.57.0.tgz"
@@ -3266,7 +3271,12 @@
   "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.43.9.tgz"
   "version" "7.43.9"
 
-"react-is@^16.13.1", "react-is@^16.7.0":
+"react-is@^16.13.1":
+  "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
+  "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
+  "version" "16.13.1"
+
+"react-is@^16.7.0":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
@@ -3505,16 +3515,7 @@
   "resolved" "https://registry.npmjs.org/string-argv/-/string-argv-0.3.1.tgz"
   "version" "0.3.1"
 
-"string-width@^4.1.0":
-  "integrity" "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g=="
-  "resolved" "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
-  "version" "4.2.3"
-  dependencies:
-    "emoji-regex" "^8.0.0"
-    "is-fullwidth-code-point" "^3.0.0"
-    "strip-ansi" "^6.0.1"
-
-"string-width@^4.2.0":
+"string-width@^4.1.0", "string-width@^4.2.0":
   "integrity" "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g=="
   "resolved" "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
   "version" "4.2.3"
@@ -3807,6 +3808,11 @@
   "integrity" "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   "version" "8.3.2"
+
+"uuid@^9.0.0":
+  "integrity" "sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg=="
+  "resolved" "https://registry.npmjs.org/uuid/-/uuid-9.0.0.tgz"
+  "version" "9.0.0"
 
 "uuid@8.0.0":
   "integrity" "sha512-jOXGuXZAWdsTH7eZLtyXMqUb9EcWMGZNbL9YcGBJl4MH4nrxHmZJhEHvyLFrkxo+28uLb/NYRcStH48fnD0Vzw=="
