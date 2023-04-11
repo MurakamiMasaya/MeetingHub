@@ -3,10 +3,13 @@ import { Event } from '@/types/Event'
 import styled from '@emotion/styled'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
 import { object, string } from 'yup'
 
 export const EventForm: NextPage = () => {
+  const router = useRouter()
   const getSchema = () => {
     return object({
       name: string()
@@ -32,22 +35,31 @@ export const EventForm: NextPage = () => {
   })
 
   const onSubmit = async (data: Event) => {
+    const uuid = uuidv4()
     const newEvent = {
+      id: uuid,
       name: data.name,
       purpose: data.purpose,
       location: data.location,
       memo: data.memo
     }
 
-    console.log(newEvent, 'newEvent')
+    try {
+      await fetch('/api/events/put-event', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: newEvent })
+      })
 
-    await fetch('/api/events/put-event', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ data: newEvent })
-    })
+      await router.push({
+        pathname: '/events/complete',
+        query: { event_id: uuid }
+      })
+    } catch (error) {
+      console.error('Failed to fetch data from API', error)
+    }
   }
 
   return (

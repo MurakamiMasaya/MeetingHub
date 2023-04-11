@@ -1,6 +1,5 @@
 import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { v4 as uuidv4 } from 'uuid'
 
 const dbClient = new DynamoDBClient({
   credentials: {
@@ -20,7 +19,7 @@ export default async function handler(
     const putCommand = new PutItemCommand({
       TableName: 'events',
       Item: {
-        id: { S: uuidv4() },
+        id: { S: event.id },
         event_name: { S: event.name },
         event_purpose: { S: event.purpose },
         event_location: { S: event.location },
