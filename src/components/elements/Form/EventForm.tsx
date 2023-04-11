@@ -1,4 +1,6 @@
 import { Button, InputText, InputTextarea } from '@/components'
+import { mediaQuery } from '@/hooks'
+import { BaseTitle } from '@/themes'
 import { Event } from '@/types/Event'
 import styled from '@emotion/styled'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -64,6 +66,7 @@ export const EventForm: NextPage = () => {
 
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <BaseTitle>必要事項を入力して、イベントを作成しよう！！</BaseTitle>
       <InputText
         label="イベント名"
         name="name"
@@ -103,15 +106,26 @@ export const EventForm: NextPage = () => {
         helperText={errors.memo?.message ?? ''}
         error={'memo' in errors}
       />
-      <Button>イベントを作る</Button>
+      <ButtonWrapper>
+        <Button className="-full-width" type="submit" size="large">
+          イベントを作る
+        </Button>
+      </ButtonWrapper>
     </FormContainer>
   )
 }
 
-const FormContainer = styled.form`
+const FormContainer = styled('form')`
   display: grid;
   gap: 16px;
   max-width: 1000px;
+  width: 80%;
   margin: 0 auto;
   padding: 16px;
+  ${mediaQuery('sp')} {
+    width: 90%;
+  }
+`
+const ButtonWrapper = styled('div')`
+  margin-top: 32px;
 `

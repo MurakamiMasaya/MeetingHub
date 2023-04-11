@@ -1,4 +1,5 @@
 import { mediaQuery } from '@/hooks'
+import { BaseContainer } from '@/themes'
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
@@ -14,22 +15,20 @@ export const Footer: NextPage = () => {
   )
 }
 
-const FooterComponent = styled.footer`
+const FooterComponent = styled('footer')`
   height: auto;
   background-color: #29264f;
 `
 
-const FooterContainer = styled.div`
+const FooterContainer = styled(BaseContainer)`
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  margin: 0 auto;
-  max-width: 1000px;
   width: 72%;
 `
 
-const Link = styled.a`
+const Link = styled('a')`
   text-decoration: none;
   color: #ffffff;
   font-size: 16px;
