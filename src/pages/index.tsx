@@ -27,7 +27,7 @@ const Home: NextPage = () => {
   )
 }
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,12 +39,10 @@ const ImageWrapper = styled.div`
     padding: 24px 16px;
   }
 `
-
-const Image = styled.img`
+const Image = styled('img')`
   width: 100%;
 `
-
-const EventFormContainer = styled.div`
+const EventFormContainer = styled('div')`
   background-color: #e3eff5;
 `
 

@@ -1,12 +1,17 @@
 import { Button, InputText, InputTextarea } from '@/components'
+import { mediaQuery } from '@/hooks'
+import { BaseTitle } from '@/themes'
 import { Event } from '@/types/Event'
 import styled from '@emotion/styled'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
 import { object, string } from 'yup'
 
 export const EventForm: NextPage = () => {
+  const router = useRouter()
   const getSchema = () => {
     return object({
       name: string()
@@ -32,26 +37,36 @@ export const EventForm: NextPage = () => {
   })
 
   const onSubmit = async (data: Event) => {
+    const uuid = uuidv4()
     const newEvent = {
+      id: uuid,
       name: data.name,
       purpose: data.purpose,
       location: data.location,
       memo: data.memo
     }
 
-    console.log(newEvent, 'newEvent')
+    try {
+      await fetch('/api/events/put-event', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: newEvent })
+      })
 
-    await fetch('/api/events/put-event', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ data: newEvent })
-    })
+      await router.push({
+        pathname: '/events/complete',
+        query: { event_id: uuid }
+      })
+    } catch (error) {
+      console.error('Failed to fetch data from API', error)
+    }
   }
 
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <BaseTitle>必要事項を入力して、イベントを作成しよう！！</BaseTitle>
       <InputText
         label="イベント名"
         name="name"
@@ -91,15 +106,26 @@ export const EventForm: NextPage = () => {
         helperText={errors.memo?.message ?? ''}
         error={'memo' in errors}
       />
-      <Button>イベントを作る</Button>
+      <ButtonWrapper>
+        <Button className="-full-width" type="submit" size="large">
+          イベントを作る
+        </Button>
+      </ButtonWrapper>
     </FormContainer>
   )
 }
 
-const FormContainer = styled.form`
+const FormContainer = styled('form')`
   display: grid;
   gap: 16px;
   max-width: 1000px;
+  width: 80%;
   margin: 0 auto;
   padding: 16px;
+  ${mediaQuery('sp')} {
+    width: 90%;
+  }
+`
+const ButtonWrapper = styled('div')`
+  margin-top: 32px;
 `

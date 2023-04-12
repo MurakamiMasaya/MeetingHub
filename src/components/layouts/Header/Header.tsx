@@ -1,4 +1,5 @@
 import { mediaQuery } from '@/hooks'
+import { BaseContainer } from '@/themes'
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
@@ -19,31 +20,26 @@ export const Header: NextPage = () => {
   )
 }
 
-const HeaderComponent = styled.div`
+const HeaderComponent = styled('div')`
   height: auto;
   background-color: #e3eff5;
 `
-
-const HeaderContainer = styled.div`
+const HeaderContainer = styled(BaseContainer)`
   display: flex;
   align-items: center;
   padding: 16px 8px;
-  margin: 0 auto;
-  max-width: 1000px;
   ${mediaQuery('sp')} {
     display: block;
   }
 `
-const LogoTitleWrapper = styled.div`
+const LogoTitleWrapper = styled('div')`
   display: flex;
   align-items: center;
 `
-
-const Logo = styled.img`
+const Logo = styled('img')`
   height: 40px;
 `
-
-const Title = styled.h1`
+const Title = styled('h1')`
   font-size: 36px;
   margin-left: 8px;
   color: #294ba4;
@@ -52,8 +48,7 @@ const Title = styled.h1`
     margin: 4px 0 4px 4px;
   }
 `
-
-const Description = styled.p`
+const Description = styled('p')`
   font-size: 16px;
   font-weight: bold;
   margin-left: 16px;
