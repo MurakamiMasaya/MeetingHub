@@ -9,6 +9,7 @@ const nextConfig = {
     emotion: true
   },
   env: {
+    APP_URL: process.env.APP_URL,
     DYNAMODB_ENDPOINT: process.env.DYNAMODB_ENDPOINT,
     DYNAMODB_REGION: process.env.DYNAMODB_REGION,
     DYNAMODB_ACCESS_KEY_ID: process.env.DYNAMODB_ACCESS_KEY_ID,

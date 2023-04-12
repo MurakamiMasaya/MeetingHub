@@ -2,12 +2,15 @@ import { mediaQuery } from '@/hooks'
 import { BaseContainer } from '@/themes'
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 export const Header: NextPage = () => {
+  const router = useRouter()
+
   return (
     <HeaderComponent>
       <HeaderContainer>
-        <LogoTitleWrapper>
+        <LogoTitleWrapper onClick={() => router.push('/')}>
           <Logo src="/logo.svg" alt="Logo" />
           <Title>みんなの集合</Title>
         </LogoTitleWrapper>
@@ -35,6 +38,9 @@ const HeaderContainer = styled(BaseContainer)`
 const LogoTitleWrapper = styled('div')`
   display: flex;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
 `
 const Logo = styled('img')`
   height: 40px;
