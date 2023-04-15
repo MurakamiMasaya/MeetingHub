@@ -38,7 +38,11 @@ const Complete: NextPage = () => {
             </BaseText>
           </TitleWrapper>
           <EventURLWrapper>
-            <InputText isDisabled={false} value={detailLink} />
+            <InputText
+              isDisabled={false}
+              value={detailLink}
+              backgroundcolor="#E6E6E6"
+            />
             <Button
               color="inherit"
               className="-half-width -bg-white"

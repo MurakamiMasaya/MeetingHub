@@ -1,11 +1,10 @@
-import { Footer, Header } from '@/components'
+import { Footer, Header, InputText } from '@/components'
 import { mediaQuery } from '@/hooks'
 import { BaseContainer } from '@/themes'
 import styled from '@emotion/styled'
 import { GetServerSideProps, NextPage } from 'next'
 
 type Props = {
-  id: string
   event_name: string
   event_purpose: string
   event_location: string
@@ -13,7 +12,6 @@ type Props = {
 }
 
 const EventDetail: NextPage<Props> = ({
-  id,
   event_name,
   event_purpose,
   event_location,
@@ -27,11 +25,40 @@ const EventDetail: NextPage<Props> = ({
       </ImageWrapper>
       <DetailComponent>
         <DetailContainer>
-          <h1>Event {id}</h1>
-          <h1>Name {event_name}</h1>
-          <h1>Purpose {event_purpose}</h1>
-          <h1>Location {event_location}</h1>
-          <h1>Memo {event_memo}</h1>
+          <InputTextWrapper>
+            <InputText
+              label="イベント名"
+              isDisabled={false}
+              value={event_name}
+              backgroundcolor="#E6E6E6"
+            />
+          </InputTextWrapper>
+          <InputTextWrapper>
+            <InputText
+              label="イベントの目的"
+              isDisabled={false}
+              value={event_purpose}
+              backgroundcolor="#E6E6E6"
+            />
+          </InputTextWrapper>
+          <InputTextWrapper>
+            <InputText
+              label="イベントを開催したい範囲"
+              isDisabled={false}
+              value={event_location}
+              backgroundcolor="#E6E6E6"
+            />
+          </InputTextWrapper>
+          <InputTextWrapper>
+            {event_memo && (
+              <InputText
+                label="メモ"
+                isDisabled={false}
+                value={event_memo}
+                backgroundcolor="#E6E6E6"
+              />
+            )}
+          </InputTextWrapper>
         </DetailContainer>
       </DetailComponent>
       <Footer />
@@ -51,7 +78,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
   return {
     props: {
-      id: item.id.S,
       event_name: item.event_name.S,
       event_purpose: item.event_purpose.S,
       event_location: item.event_location.S,
@@ -66,9 +92,13 @@ const DetailComponent = styled('div')`
 `
 const DetailContainer = styled(BaseContainer)`
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 3%;
   padding: 40px 16px;
+  ${mediaQuery('sp')} {
+    gap: 0;
+  }
 `
 const ImageWrapper = styled('div')`
   display: flex;
@@ -84,6 +114,13 @@ const ImageWrapper = styled('div')`
 `
 const Image = styled('img')`
   width: 100%;
+`
+const InputTextWrapper = styled('div')`
+  flex-basis: 47%;
+  margin-bottom: 24px;
+  ${mediaQuery('sp')} {
+    flex-basis: 100%;
+  }
 `
 
 export default EventDetail
