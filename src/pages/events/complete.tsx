@@ -42,6 +42,7 @@ const Complete: NextPage = () => {
               isDisabled={false}
               value={detailLink}
               backgroundcolor="#E6E6E6"
+              readOnly
             />
             <Button
               color="inherit"

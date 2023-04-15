@@ -31,6 +31,7 @@ const EventDetail: NextPage<Props> = ({
               isDisabled={false}
               value={event_name}
               backgroundcolor="#E6E6E6"
+              readOnly
             />
           </InputTextWrapper>
           <InputTextWrapper>
@@ -39,6 +40,7 @@ const EventDetail: NextPage<Props> = ({
               isDisabled={false}
               value={event_purpose}
               backgroundcolor="#E6E6E6"
+              readOnly
             />
           </InputTextWrapper>
           <InputTextWrapper>
@@ -47,6 +49,7 @@ const EventDetail: NextPage<Props> = ({
               isDisabled={false}
               value={event_location}
               backgroundcolor="#E6E6E6"
+              readOnly
             />
           </InputTextWrapper>
           <InputTextWrapper>
@@ -56,6 +59,7 @@ const EventDetail: NextPage<Props> = ({
                 isDisabled={false}
                 value={event_memo}
                 backgroundcolor="#E6E6E6"
+                readOnly
               />
             )}
           </InputTextWrapper>
