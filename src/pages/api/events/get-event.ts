@@ -1,4 +1,4 @@
-import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb'
+import { DynamoDBClient, GetItemCommand } from '@aws-sdk/client-dynamodb'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const dbClient = new DynamoDBClient({
@@ -15,22 +15,18 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const event = req.body.data
-    const putCommand = new PutItemCommand({
+    const { id } = req.query
+    const getItemCommand = new GetItemCommand({
       TableName: 'events',
-      Item: {
-        id: { S: event.id },
-        event_name: { S: event.name },
-        event_purpose: { S: event.purpose },
-        event_location: { S: event.location },
-        event_memo: { S: event.memo }
+      Key: {
+        id: { S: id as string }
       }
     })
 
-    await dbClient.send(putCommand)
+    const getResultData = await dbClient.send(getItemCommand)
 
     res.status(200).json({
-      result: 'SUCCESS'
+      result: getResultData
     })
   } catch (error) {
     res.status(500).json({ result: error })

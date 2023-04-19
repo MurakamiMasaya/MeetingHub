@@ -20,10 +20,13 @@ const Label = styled('label')`
   font-size: 15px;
   font-weight: 600;
 `
-const CustomTextField = styled(TextField)<{ placeholdercolor?: string }>`
+const CustomTextField = styled(TextField)<{
+  placeholdercolor?: string
+  backgroundcolor?: string
+}>`
   width: 100%;
   .MuiOutlinedInput-root {
-    background: white;
+    background: ${({ backgroundcolor }) => backgroundcolor || 'white'};
   }
   .MuiInputBase-input {
     color: ${({ placeholdercolor }) => placeholdercolor || ''};
@@ -66,6 +69,7 @@ export interface InputTextProps {
   readOnly?: boolean
   variant?: 'filled' | 'outlined' | 'standard'
   placeholderColor?: string
+  backgroundcolor?: string
   isLeftIcon?: boolean
 }
 
@@ -94,6 +98,7 @@ export const InputText: React.FC<InputTextProps> = ({
   readOnly = false,
   variant = 'outlined',
   placeholderColor,
+  backgroundcolor,
   isLeftIcon = false
 }) => {
   /*eslint-disable react/jsx-no-duplicate-props*/
@@ -124,6 +129,7 @@ export const InputText: React.FC<InputTextProps> = ({
         size={size}
         variant={variant}
         placeholdercolor={placeholderColor}
+        backgroundcolor={backgroundcolor}
         InputProps={{
           startAdornment:
             icon && isLeftIcon ? (

@@ -11,17 +11,23 @@ const Complete: NextPage = () => {
   const router = useRouter()
 
   const { event_id: id } = router.query
-  const detailLink = `${process.env.NEXT_PUBLIC_APP_URL}/events/details/${id}`
+  const detailLink = `${process.env.APP_URL}/events/details/${id}`
 
   const handleCopy = () => {
     navigator.clipboard.writeText(detailLink)
     setIsCopied(true)
+  }
+  const pushToEventDetail = () => {
+    router.push(detailLink)
   }
 
   return (
     <>
       <Header />
       <CompleteComponent>
+        <ImageWrapper>
+          <Image src="/adsense_white.png" alt="google adsense" />
+        </ImageWrapper>
         <CompleteContainer>
           <TitleWrapper>
             <BaseTitle className="-white -left">
@@ -32,7 +38,12 @@ const Complete: NextPage = () => {
             </BaseText>
           </TitleWrapper>
           <EventURLWrapper>
-            <InputText isDisabled={false} value={detailLink} />
+            <InputText
+              isDisabled={false}
+              value={detailLink}
+              backgroundcolor="#E6E6E6"
+              readOnly
+            />
             <Button
               color="inherit"
               className="-half-width -bg-white"
@@ -44,7 +55,11 @@ const Complete: NextPage = () => {
             </Button>
           </EventURLWrapper>
           <ButtonWrapper>
-            <Button className="-full-width" size="large">
+            <Button
+              className="-full-width"
+              size="large"
+              onClick={pushToEventDetail}
+            >
               イベントページを表示する
             </Button>
           </ButtonWrapper>

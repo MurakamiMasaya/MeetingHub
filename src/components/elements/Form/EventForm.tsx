@@ -1,6 +1,6 @@
 import { Button, InputText, InputTextarea } from '@/components'
 import { mediaQuery } from '@/hooks'
-import { BaseTitle } from '@/themes'
+import { BaseContainer, BaseTitle } from '@/themes'
 import { Event } from '@/types/Event'
 import styled from '@emotion/styled'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -67,45 +67,55 @@ export const EventForm: NextPage = () => {
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <BaseTitle>必要事項を入力して、イベントを作成しよう！！</BaseTitle>
-      <InputText
-        label="イベント名"
-        name="name"
-        placeholder="〇〇同窓会、〇〇打ち合わせ"
-        maxLength={20}
-        isRequired
-        register={register<'name'>('name')}
-        helperText={errors.name?.message ?? ''}
-        error={'name' in errors}
-      />
-      <InputText
-        label="イベントの目的"
-        name="purpose"
-        placeholder="飲み会、ショッピング"
-        maxLength={30}
-        isRequired
-        register={register<'purpose'>('purpose')}
-        helperText={errors.purpose?.message ?? ''}
-        error={'purpose' in errors}
-      />
-      <InputText
-        label="イベントを開催したい範囲"
-        name="location"
-        placeholder="東京、関西"
-        maxLength={20}
-        isRequired
-        register={register<'location'>('location')}
-        helperText={errors.location?.message ?? ''}
-        error={'location' in errors}
-      />
-      <InputTextarea
-        label="メモ"
-        name="memo"
-        placeholder="締切は〇〇日まで"
-        maxLength={1000}
-        register={register<'memo'>('memo')}
-        helperText={errors.memo?.message ?? ''}
-        error={'memo' in errors}
-      />
+      <InputTextContainer>
+        <InputTextWrapper>
+          <InputText
+            label="イベント名"
+            name="name"
+            placeholder="〇〇同窓会、〇〇打ち合わせ"
+            maxLength={20}
+            isRequired
+            register={register<'name'>('name')}
+            helperText={errors.name?.message ?? ''}
+            error={'name' in errors}
+          />
+        </InputTextWrapper>
+        <InputTextWrapper>
+          <InputText
+            label="イベントの目的"
+            name="purpose"
+            placeholder="飲み会、ショッピング"
+            maxLength={30}
+            isRequired
+            register={register<'purpose'>('purpose')}
+            helperText={errors.purpose?.message ?? ''}
+            error={'purpose' in errors}
+          />
+        </InputTextWrapper>
+        <InputTextWrapper>
+          <InputText
+            label="イベントを開催したい範囲"
+            name="location"
+            placeholder="東京、関西"
+            maxLength={20}
+            isRequired
+            register={register<'location'>('location')}
+            helperText={errors.location?.message ?? ''}
+            error={'location' in errors}
+          />
+        </InputTextWrapper>
+        <InputTextWrapper>
+          <InputTextarea
+            label="メモ"
+            name="memo"
+            placeholder="締切は〇〇日まで"
+            maxLength={1000}
+            register={register<'memo'>('memo')}
+            helperText={errors.memo?.message ?? ''}
+            error={'memo' in errors}
+          />
+        </InputTextWrapper>
+      </InputTextContainer>
       <ButtonWrapper>
         <Button className="-full-width" type="submit" size="large">
           イベントを作る
@@ -119,11 +129,27 @@ const FormContainer = styled('form')`
   display: grid;
   gap: 16px;
   max-width: 1000px;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   padding: 16px;
   ${mediaQuery('sp')} {
     width: 90%;
+  }
+`
+const InputTextContainer = styled(BaseContainer)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 3%;
+  ${mediaQuery('sp')} {
+    gap: 0;
+  }
+`
+const InputTextWrapper = styled('div')`
+  flex-basis: 47%;
+  margin-bottom: 24px;
+  ${mediaQuery('sp')} {
+    flex-basis: 100%;
   }
 `
 const ButtonWrapper = styled('div')`
